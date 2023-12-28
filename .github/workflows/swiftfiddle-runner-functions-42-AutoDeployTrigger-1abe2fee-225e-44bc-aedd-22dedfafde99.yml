@@ -4,15 +4,14 @@ name: Trigger auto deployment for swiftfiddle-runner-functions-42
 on:
   # Automatically trigger it when detected changes in repo
   push:
-    branches: 
-      [ main ]
+    branches: [main]
     paths:
-    - '**'
-    - '.github/workflows/swiftfiddle-runner-functions-42-AutoDeployTrigger-1abe2fee-225e-44bc-aedd-22dedfafde99.yml'
+      - "**"
+      - ".github/workflows/swiftfiddle-runner-functions-42-AutoDeployTrigger-1abe2fee-225e-44bc-aedd-22dedfafde99.yml"
 
-  # Allow manual trigger 
+  # Allow manual trigger
   workflow_dispatch:
-      
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -29,14 +28,10 @@ jobs:
       - name: Build and push container image to registry
         uses: azure/container-apps-deploy-action@v2
         with:
-          appSourcePath: ${{ github.workspace }} 
+          appSourcePath: ${{ github.workspace }}
           registryUrl: swiftfiddle.azurecr.io
           registryUsername: ${{ secrets.SWIFTFIDDLERUNNERFUNCTIONS42_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.SWIFTFIDDLERUNNERFUNCTIONS42_REGISTRY_PASSWORD }}
           containerAppName: swiftfiddle-runner-functions-42
           resourceGroup: swiftfiddle
-          imageToBuild: swiftfiddle.azurecr.io/swiftfiddle-runner-functions-42:${{ github.sha }}
-          
-
-     
-
+          imageToBuild: swiftfiddle.azurecr.io/swiftfiddle-runner-functions-42:latest
