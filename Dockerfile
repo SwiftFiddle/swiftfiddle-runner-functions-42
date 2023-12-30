@@ -1,6 +1,6 @@
 FROM denoland/deno:bin-1.39.0 AS deno
 
-FROM ubuntu:18.04
+FROM ubuntu:22.04
 LABEL Description="Docker Container for the Swift programming language"
 
 # Install related packages and set LLVM 3.9 as the compiler
